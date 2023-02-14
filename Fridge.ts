@@ -1,4 +1,4 @@
-import {IFoodInFridge} from "./Food";
+import {Food, IFoodInFridge} from "./Food";
 
 export interface IFridge {
     allFood: IFoodInFridge[]
@@ -21,8 +21,8 @@ export class Fridge{
             return item;
         })
     }
-    feedSomeone(title:string){
-        let foodForSomeone;
+    feedSomeone(title:string):Food{
+        let foodForSomeone:Food;
         let resultFood = this.allFood.filter(itemFood => itemFood.title == title);
         if (resultFood.length == 0 ) console.log('This food doesn\'t exist in fridge')
         if (resultFood.length) this.allFood.map(item => {
