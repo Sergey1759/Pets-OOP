@@ -2,7 +2,7 @@ import {Cat, Dog} from "./Animal.js";
 import {Food} from "./Food.js";
 import {Fridge} from "./Fridge.js";
 
-let milk = new Food(1,'milk',0.01,1);
+let milk = new Food(1,'milk',0.00,1);
 let meat = new Food(3,'meat',1,1);
 let potato = new Food(2,'potato',0.5,1);
 

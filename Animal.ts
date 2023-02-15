@@ -1,5 +1,6 @@
 import {Food} from "./Food.js";
 import {errorHandler} from "./Error.js";
+import {dateHelper} from "./DateHelper.js";
 
 export interface IAnimal{
     name: string,
@@ -21,7 +22,7 @@ export class Animal implements IAnimal{
         try {
             if (food != undefined) {
                 this.eatExpiration = new Date(this.eatExpiration.getTime() + (1000 * 60 * 60 * food.power));
-                console.log(`${this.name} ate a ${food.title}, they will be hungry at ${this.eatExpiration.getDate()}.${this.eatExpiration.getMonth() + 1}. ${this.eatExpiration.getHours()}:${this.eatExpiration.getMinutes()}`);
+                console.log(`${this.name} ate a ${food.title}, they will be hungry at ${dateHelper(this.eatExpiration)}`);
             } else {
                 throw Error('food as parameter is undefined | This food doesn\'t exist in fridge')
             }
