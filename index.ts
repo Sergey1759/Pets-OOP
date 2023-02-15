@@ -19,8 +19,15 @@ console.log(fridge.openFridge())
 let cat =  new Cat('Tomas', 1);
 let dog = new Dog('Bob', 5);
 
-cat.eat(fridge.openFridge()[0]);
-cat.eat(fridge.openFridge()[0]);
+cat.eat(fridge.feedSomeone(`milk`));
+cat.eat(fridge.feedSomeone(''));
+
+console.log(fridge.openFridge())
+cat.eat(fridge.feedSomeone(`milk`));
+cat.eat(fridge.feedSomeone(`milk`));
+cat.eat(fridge.feedSomeone(`milk`));
+console.log(fridge.openFridge())
+
 
 console.log(dog.say('haf'));
 console.log(cat.say('meaw'))

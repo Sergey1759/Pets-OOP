@@ -1,4 +1,5 @@
-import {Food} from "./Food";
+import {Food} from "./Food.js";
+import {errorHandler} from "./Error.js";
 
 export interface IAnimal{
     name: string,
@@ -16,9 +17,17 @@ export class Animal implements IAnimal{
     say(word: string):string{
         return `${this.name} said ${word}`
     }
-    eat(food: Food){
-        this.eatExpiration = new Date(this.eatExpiration.getTime() + (1000*60*60* food.power));
-        console.log(`${this.name} ate a ${food.title}, they will be hungry at ${this.eatExpiration.getDate()}.${this.eatExpiration.getMonth()+1}. ${this.eatExpiration.getHours()}:${this.eatExpiration.getMinutes()}`);
+    eat(food: Food| undefined){
+        try {
+            if (food != undefined) {
+                this.eatExpiration = new Date(this.eatExpiration.getTime() + (1000 * 60 * 60 * food.power));
+                console.log(`${this.name} ate a ${food.title}, they will be hungry at ${this.eatExpiration.getDate()}.${this.eatExpiration.getMonth() + 1}. ${this.eatExpiration.getHours()}:${this.eatExpiration.getMinutes()}`);
+            } else {
+                throw Error('food as parameter is undefined | This food doesn\'t exist in fridge')
+            }
+        } catch (error) {
+            errorHandler(error);
+        }
     }
 
 }

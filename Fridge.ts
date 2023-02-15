@@ -1,4 +1,4 @@
-import {IFoodInFridge} from "./Food";
+import {Food, IFoodInFridge} from "./Food";
 
 export interface IFridge {
     allFood: IFoodInFridge[]
@@ -6,32 +6,32 @@ export interface IFridge {
 }
 
 export class Fridge{
-    readonly allFood: IFoodInFridge[];
+    private allFood: IFoodInFridge[];
     constructor() {
         this.allFood = []
     }
     openFridge():IFoodInFridge[]{
         return this.allFood
     }
-    addToFridge(food: IFoodInFridge){
-        let resultFood = this.allFood.filter(itemFood => itemFood.title == food.title);
-        if (resultFood.length == 0 ) this.allFood.push(food);
-        if (resultFood.length) this.allFood.map(item => {
+    addToFridge(food: IFoodInFridge): void{
+        let resultFood = this.allFood.find(itemFood => itemFood.title == food.title);
+        if (!resultFood) this.allFood.push(food);
+
+        if (resultFood) this.allFood.map(item => {
             if(item.title == food.title) ++item.count
             return item;
         })
     }
-    feedSomeone(title:string){
-        let foodForSomeone;
-        let resultFood = this.allFood.filter(itemFood => itemFood.title == title);
-        if (resultFood.length == 0 ) console.log('This food doesn\'t exist in fridge')
-        if (resultFood.length) this.allFood.map(item => {
-            if(item.title == title){
-                --item.count;
-                foodForSomeone = item;
+    feedSomeone(title:string):Food | undefined {
+        let foodForSomeone: Food | undefined = this.allFood.find(item => item.title === title);
+
+        if (foodForSomeone) {
+            foodForSomeone.count--;
+
+            if(foodForSomeone.count == 0){
+                this.allFood = this.allFood.filter(item => item.title !== title)
             }
-            return item;
-        });
+        }
         return foodForSomeone;
     }
 
